@@ -14,7 +14,7 @@ def user(request):
 
     if request.method == 'GET':
         user = User.objects.all()
-        serializer = UserSerializer(user, many=True)
+        serializer = UserSerializer(user, many=True, context={'request': request})
         return Response(serializer.data, status=HTTP_200_OK)
 
     elif request.method == 'POST':
@@ -52,7 +52,7 @@ def category(request):
 
     if request.method == 'GET':
         category = Category.objects.all()
-        serializer = CategorySerializer(category, many=True)
+        serializer = CategorySerializer(category, many=True, context={'request': request})
         return Response(serializer.data, status=HTTP_200_OK)
     elif request.method == 'POST':
         serializer = CategorySerializer(data=request.data, partial=True)
